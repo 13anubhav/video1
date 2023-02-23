@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html  lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="WebsiteProvide-KrishnaJaiKumar">
+    <title>The Video...</title>
+    
+	
+  </head>
+  <body>
+      
+     <style>
+         * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 1.4rem;
+}
+/* 
+#bound-one {
+  background: #d0d8db;
+}
+
+#bound-two {
+  background: #dfcece;
+} */
+
+#bound-three {
+  background: #d0d6b3;
+}
+
+.scroll-bound {
+  height: 400vh;
+}
+.scroll-bound .content {
+  height: 100vh;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.scroll-bound video {
+  width: 90%;
+}
+.pk_video {
+     background-color: red !important; /* or whatever you want */
+}
+     </style> 
+      
+
+<div class="app">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <div id="bound-one" class="scroll-bound">
+		<div class="content">
+			<p>WebM Video</p>
+			     
+           <video width="600"  muted preload>
+<source src="./img/keyboardwithpurplebg.mp4" type="video/mp4">
+<source src="./img/keyboardwithpurplebg.mp4" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+     
+		</div>
+	</div> -->
+	<div id="bound-three" class="scroll-bound">
+		<div class="content">
+			<p>MP4 Video - Keyframe Interval 20</p>
+ 			<video width="800" muted preload>
+   			<!-- <source src="https://cdn.ananaspizza.de/file/malte-image-store/keyframe-interval-20.mp4" type="video/mp4"> -->
+               <source src="video10.mp4" type="video/mp4">
+    		<!-- <p>Your user agent does not support the HTML5 Video element.</p> -->
+            <video width="100%" height="100%" style="background-color: #fff;" src="">
+      </video>
+		</div>
+	</div>
+	<!-- <div id="bound-two" class="scroll-bound">
+		<div class="content">
+			<p>MP4 Video - Keyframe Interval 1</p>
+ 		<video width="600"  muted preload>
+  <source src="./img/laptop.mp4" type="video/mp4">
+  <source src="./img/laptop.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+		</div>
+	</div> -->
+	<!-- <div id="bound-three" class="scroll-bound">
+		<div class="content">
+			<p>MP4 Video - Keyframe Interval 20</p>
+ 			<video width="600" muted preload>
+   			 <source src="https://cdn.ananaspizza.de/file/malte-image-store/keyframe-interval-20.mp4" type="video/mp4"> -->
+               <source src="video10.mp4" type="video/mp4">
+    		<!-- <p>Your user agent does not support the HTML5 Video element.</p> -->
+
+      </video>
+
+		</div>
+	</div> -->
+</div>
+
+
+
+<script>
+    
+   const registerVideo = (bound, video) => {
+	bound = document.querySelector(bound);
+	video = document.querySelector(video);
+	const scrollVideo = ()=>{
+		if(video.duration) {
+			const distanceFromTop = window.scrollY + bound.getBoundingClientRect().top;
+			const rawPercentScrolled = (window.scrollY - distanceFromTop) / (bound.scrollHeight - window.innerHeight);
+			const percentScrolled = Math.min(Math.max(rawPercentScrolled, 0), 3);
+			
+			video.currentTime = video.duration * percentScrolled;
+		}
+		requestAnimationFrame(scrollVideo);  
+	}
+	requestAnimationFrame(scrollVideo);
+    document.addEventListener("touchmove", function(event) {
+        if (event.touches[0].clientY > window.innerHeight / 2) {
+         // video.playbackRate += 0.25;   // Orignal
+          video.playbackRate += 5;
+        } else {  
+         // video.playbackRate -= 0.25;  // Original
+          video.playbackRate -= 5;
+        }
+      });
+}
+
+// const videoContainer = document.querySelector('#videoContainer');
+// const video = document.querySelector('#video');
+
+// videoContainer.addEventListener('touchstart', handleTouchStart, false);
+// videoContainer.addEventListener('touchmove', handleTouchMove, false);
+
+let xDown = null;
+let yDown = null;
+
+function handleTouchStart(evt) {
+  xDown = evt.touches[0].clientX;
+  yDown = evt.touches[0].clientY;
+}
+
+function handleTouchMove(evt) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  const xUp = evt.touches[0].clientX;
+  const yUp = evt.touches[0].clientY;
+
+  const xDiff = xDown - xUp;
+  const yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    if (xDiff > 0) {
+      video.currentTime -= 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001;
+    } else {
+      video.currentTime += 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001;
+    }
+  }
+
+  xDown = null;
+  yDown = null;
+}
+
+
+// registerVideo("#bound-one", "#bound-one video");
+
+//  registerVideo("#bound-two", "#bound-two video")
+
+registerVideo("#bound-three", "#bound-three video")
+</script>
+
+
+</body>
+</html>
